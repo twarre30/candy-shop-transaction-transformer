@@ -1,31 +1,21 @@
-function candySalesToObject(sales){
+function candySalesToObject([item, price, quantity]){
     return {
-        item: sales[0],
-        price: + sales[1],
-        quantity: sales[2]
+        item,
+        price: +price,
+        quantity,
     }
 }
 
-function salesDayToObject(date, sales){
-    return sales[date].reduce((a, b) => {
-        a.date = date
-        a.sales.push(candySalesToObject(b))
-        return a
-    }, {sales: []})
-        
+function salesDayToObject(date, salesDay){
+    return {
+        date
+        sales: salesDay[date].map(candySalesToObject)
+     }        
 }
 
 function allSalesToArray(allSales){
-    return Object.keys(allSales)
-    .map(date => salesDayToObject(date, allSales));
-
+    return Object.keys(allSales).map(date => salesDayToObject(date, allSales));
 }
-
-
-
-
-
-
 
 
 

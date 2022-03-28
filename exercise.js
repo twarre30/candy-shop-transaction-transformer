@@ -13,8 +13,12 @@ function salesDayToObject(date, salesDay){
      }        
 }
 
-function allSalesToArray(allSales){
-    return Object.keys(allSales).map(date => salesDayToObject(date, allSales));
+function allSalesToArray(salesDates){
+    return Object.entries(salesDates)
+        .map(([date, salesDate] => (
+        salesDayToObject(date, {[date]: salesDate
+       })
+      ))
 }
 
 
